@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee{
+    int regId;
+    string name;
+    string department;
+    double baseSalary;
+
+public:
+    Employee(){
+        regId = 0;
+        name = " ";
+        department = " ";
+        baseSalary = 0;
+    }
+
+    Employee(int regId, string name){
+        this->regId = regId;
+        this->name = name;
+        department = " ";
+        baseSalary = 0;
+    }
+
+    Employee(int regId, string name, string department, double baseSalary){
+        this->regId = regId;
+        this->name = name;
+        this->department = department;
+        this->baseSalary = baseSalary;
+    }
+
+    Employee(const Employee &e){
+        regId = e.regId;
+        name = e.name;
+        department = e.department;
+        baseSalary = e.baseSalary;
+    }
+
+    double calculatePay(){
+        return baseSalary;
+    }
+
+    double calculatePay(double bonus){
+        return baseSalary + bonus;
+    }
+
+    double calculatePay(double hours, double rate){
+        return baseSalary + (hours * rate);
+    }
+
+    double calculatePay(double bonus, int tax){
+        double taxAmount = (bonus * tax) / 100;
+        return baseSalary + bonus - taxAmount;
+    }
+
+    void updateProfile(string d){
+        department = d;
+    }
+
+    void updateProfile(double salary){
+        baseSalary = salary;
+    }
+
+    void updateProfile(string d, double salary){
+        department = d;
+        baseSalary = salary;
+    }
+
+    void display(){
+        cout << "\nReg. ID: " << regId;
+        cout << "\nName: " << name;
+        cout << "\nDepartment: " << department;
+        cout << "\nBase Salary: " << baseSalary << endl;
+    }
+};
+
+int main(){
+    Employee e1;
+
+    Employee e2(101, "Ravi");
+    Employee e3(102, "Shubham", "CSE", 50000);
+    Employee e4(e3);
+
+    e1.display();
+    e2.display();
+    e3.display();
+    e4.display();
+
+    cout << "\n" << e3.calculatePay();
+    cout << "\n" << e3.calculatePay(5000);
+    cout << "\n" << e3.calculatePay(10, 500);
+    cout << "\n" << e3.calculatePay(5000, 10);
+
+    e3.updateProfile("IT");
+    e3.updateProfile(60000);
+    e3.updateProfile("Finance", 70000);
+
+    e3.display();
+
+    return 0;
+}
