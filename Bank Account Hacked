@@ -1,1 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class BaseAccountClass {
+public:
+    virtual void SendMoney() {
+        cout << "Money sent successfully" << endl;
+    }
+
+    virtual void ReceiveMoney() {
+        cout << "Money received successfully" << endl;
+    }
+};
+
+class ConsumerAccountClass : public BaseAccountClass {
+public:
+    bool hacked = true;
+
+    void SendMoney() override {
+        if(hacked)
+            cout << "Account hacked! Permission to send money denied" << endl;
+        else
+            cout << "Money sent successfully" << endl;
+    }
+
+    void ReceiveMoney() override {
+        if(hacked)
+            cout << "Account hacked! Permission to receive money denied" << endl;
+        else
+            cout << "Money received successfully" << endl;
+    }
+};
+
+int main() {
+    BaseAccountClass *account;
+    ConsumerAccountClass consumer;
+
+    account = &consumer;
+
+    cout << "Bank Account Security System" << endl;
+    account->SendMoney();
+    account->ReceiveMoney();
+
+    return 0;
+}
+
 
